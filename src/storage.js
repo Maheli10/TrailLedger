@@ -18,9 +18,8 @@ export async function save(key, value) {
 
 // Storage keys used across the app
 export const KEYS = {
-  plans: 'tl_plans',         // [{id, routeId, date, notes}]
-  logs: 'tl_logs',           // [{id, routeId, date, hours, rating, notes}]
-  reached: 'tl_reached',     // { routeId: [checkpointName, ...] }
-  packed: 'tl_packed',       // { routeId: [itemName, ...] }
-  favourites: 'tl_favourites', // [routeId, ...]
+  plans: 'tl_plans',          // [{id, name, routeId, date, notes}]
+  logs: 'tl_logs',            // [{id, name, routeId, date, hours, rating, notes}]
+  packed: 'tl_plan_packed',   // { planId: [itemName, ...] }
+  theme: 'tl_theme',          // 'light' or 'dark'
 };
