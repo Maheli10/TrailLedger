@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { FlatList, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { routes } from '../data/routes';
-import { Chip, Badge, Empty, common } from '../components';
+import { useTheme } from '../ThemeContext';
+import { Chip, Badge, Empty } from '../components';
 
 const LEVELS = ['All', 'Easy', 'Moderate', 'Hard'];
 
 export default function RoutesScreen({ navigation }) {
+  const { colors, s } = useTheme();
   const [search, setSearch] = useState('');
   const [level, setLevel] = useState('All');
 
@@ -17,14 +19,15 @@ export default function RoutesScreen({ navigation }) {
   });
 
   return (
-    <View style={common.screen}>
+    <View style={s.screen}>
       <TextInput
-        style={common.input}
+        style={s.input}
         placeholder="Search by name or region..."
+        placeholderTextColor={colors.sub}
         value={search}
         onChangeText={setSearch}
       />
-      <View style={common.row}>
+      <View style={s.row}>
         {LEVELS.map((l) => (
           <Chip key={l} label={l} active={level === l} onPress={() => setLevel(l)} />
         ))}
@@ -35,13 +38,15 @@ export default function RoutesScreen({ navigation }) {
         keyExtractor={(item) => item.id}
         ListEmptyComponent={<Empty text="No routes match your search." />}
         renderItem={({ item }) => (
-          <TouchableOpacity style={common.card} onPress={() => navigation.navigate('RouteDetail', { routeId: item.id })}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              <Text style={[common.title, { flex: 1 }]}>{item.name}</Text>
+          <TouchableOpacity style={s.card} onPress={() => navigation.navigate('RouteDetail', { routeId: item.id })}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Text style={[s.title, { flex: 1, marginRight: 8 }]}>{item.name}</Text>
               <Badge level={item.difficulty} />
             </View>
-            <Text style={common.sub}>{item.region}</Text>
-            <Text style={common.sub}>{item.distanceKm} km · {item.durationHrs} h · +{item.elevationGainM} m</Text>
+            <Text style={s.sub}>📍 {item.region}</Text>
+            <Text style={[s.sub, { marginTop: 6 }]}>
+              📏 {item.distanceKm} km   ⏱️ {item.durationHrs} h   ⛰️ {item.elevationGainM} m
+            </Text>
           </TouchableOpacity>
         )}
       />
