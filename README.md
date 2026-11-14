@@ -1,8 +1,8 @@
 # TrailLedger – Offline Hiking Planner & Personal Hike Log
 
-**Name:S.A.M.S.Samaraweera**
-**Index number: 2022/ICT/23**
-**Module:** IT3133 - ICA 03 – React Native Project
+**Name:S.A.M.S.Samaraweera |** 
+**Index number: 2022/ICT/23 |**
+**Module: IT3133 - ICA 03 – React Native Project**
 
 ---
 
@@ -25,25 +25,23 @@ The app works **without an internet connection**. The route dataset is created b
 
 ## Screens (7)
 
-| # | Screen        | Navigation |
-
-| 1 | Home          | Bottom tab |
-| 2 | Routes        | Bottom tab |
-| 3 | Planner       | Bottom tab |
-| 4 | Hike Log      | Bottom tab |
-| 5 | Route Details | Stack |
-| 6 | Plan Hike     | Stack |
-| 7 | Add Log       | Stack |
+- 1 . Home          - Bottom tab 
+- 2 . Routes        - Bottom tab 
+- 3 . Planner       - Bottom tab 
+- 4 . Hike Log      - Bottom tab 
+- 5 . Route Details - Stack 
+- 6 . Plan Hike     - Stack 
+- 7 . Add Log       - Stack 
 
 ## Technologies Used
 
-| React Native - Building the mobile interface 
-| Expo - Development tooling and running the app on a device 
-| React Navigation (bottom tabs + native stack) - Navigation between screens 
-| AsyncStorage - Storing user data locally on the device 
-| `react-native-screens`, `react-native-safe-area-context` - Navigation support libraries 
-| JavaScript (ES6) and React Hooks - Application logic 
-| Git and GitHub - Version control, using `development`, `testing` and `main` branches 
+- React Native - Building the mobile interface 
+- Expo - Development tooling and running the app on a device 
+- React Navigation (bottom tabs + native stack) - Navigation between screens 
+- AsyncStorage - Storing user data locally on the device 
+- `react-native-screens`, `react-native-safe-area-context` - Navigation support libraries 
+- JavaScript (ES6) and React Hooks - Application logic 
+- Git and GitHub - Version control, using `development`, `testing` and `main` branches 
 
 ## Local Data Storage
 
@@ -89,7 +87,7 @@ TrailLedger/
 1. **Clone the repository**
    ```
    git clone https://github.com/Maheli10/TrailLedger.git
-   cd TrailLedger-Hiking-Planner-Gear-Log
+   cd TrailLedger
    ```
 
 2. **Install the dependencies**
