@@ -1,42 +1,56 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
-import { routes } from '../data/routes';
-import { load, save, KEYS } from '../storage';
-import { Btn, Badge, common } from '../components';
+import { routeById } from '../data/routes';
+import { useTheme } from '../ThemeContext';
+import { Btn, Badge, PhotoHeader } from '../components';
 
 export default function RouteDetailScreen({ route, navigation }) {
-  const trail = routes.find((r) => r.id === route.params.routeId);
-  const [favs, setFavs] = useState([]);
+  const { colors, s } = useTheme();
+  const trail = routeById(route.params.routeId);
 
-  useFocusEffect(useCallback(() => { load(KEYS.favourites, []).then(setFavs); }, []));
-
-  const isFav = favs.includes(trail.id);
-  const toggleFav = async () => {
-    const next = isFav ? favs.filter((f) => f !== trail.id) : [...favs, trail.id];
-    setFavs(next);
-    await save(KEYS.favourites, next);
-  };
+  const stats = [
+    { value: trail.distanceKm, unit: 'km', label: 'Distance' },
+    { value: trail.durationHrs, unit: 'h', label: 'Est. time' },
+    { value: trail.elevationGainM, unit: 'm', label: 'Elevation' },
+  ];
 
   return (
-    <ScrollView style={common.screen}>
-      <View style={common.card}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <Text style={[common.title, { flex: 1, fontSize: 22 }]}>{trail.name}</Text>
-          <Badge level={trail.difficulty} />
-        </View>
-        <Text style={common.sub}>{trail.region}</Text>
-        <Text style={{ marginVertical: 10 }}>{trail.description}</Text>
-        <Text>📏 Distance: {trail.distanceKm} km</Text>
-        <Text>⏱️ Duration: {trail.durationHrs} hours</Text>
-        <Text>⛰️ Elevation gain: {trail.elevationGainM} m</Text>
-        <Text>📍 Checkpoints: {trail.checkpoints.length}</Text>
+    <ScrollView style={s.screen}>
+      <PhotoHeader source={require('../../assets/banner.jpg')} title={trail.name} subtitle={`📍 ${trail.region}`} height={150} />
+
+      <View style={{ flexDirection: 'row', marginBottom: 12 }}>
+        <Badge level={trail.difficulty} />
       </View>
 
-      <Btn title={isFav ? '★ Remove from favourites' : '☆ Add to favourites'} outline onPress={toggleFav} />
-      <Btn title="📅 Plan this hike" onPress={() => navigation.navigate('PlanHike', { routeId: trail.id })} />
-      <Btn title="📍 Checkpoint reference" onPress={() => navigation.navigate('Checkpoints', { routeId: trail.id })} />
-      <Btn title="🎒 Packing list" onPress={() => navigation.navigate('Packing', { routeId: trail.id })} />
+      {/* Green stats panel */}
+      <View style={{ flexDirection: 'row', backgroundColor: colors.panel, borderRadius: 18, paddingVertical: 16, marginBottom: 12 }}>
+        {stats.map((st) => (
+          <View key={st.label} style={{ flex: 1, alignItems: 'center' }}>
+            <Text style={{ color: '#DAF1DE', fontSize: 22, fontWeight: '800' }}>
+              {st.value}
+              <Text style={{ fontSize: 13, fontWeight: '500' }}> {st.unit}</Text>
+            </Text>
+            <Text style={{ color: '#BFDCC6', fontSize: 12, marginTop: 2 }}>{st.label}</Text>
+          </View>
+        ))}
+      </View>
+
+      <View style={s.card}>
+        <Text style={s.title}>About this trail</Text>
+        <Text style={[s.text, { marginTop: 6, lineHeight: 21 }]}>{trail.description}</Text>
+      </View>
+
+      <View style={s.card}>
+        <Text style={[s.title, { marginBottom: 8 }]}>Checkpoints</Text>
+        {trail.checkpoints.map((c, i) => (
+          <View key={c.name} style={{ flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 6 }}>
+            <Text style={s.text}>{i + 1}. {c.name}</Text>
+            <Text style={{ color: colors.sub }}>{c.elevationM} m</Text>
+          </View>
+        ))}
+      </View>
+
+      <Btn title="📅  Plan this hike" onPress={() => navigation.navigate('PlanHike', { routeId: trail.id })} />
     </ScrollView>
   );
 }

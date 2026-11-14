@@ -81,3 +81,9 @@ export const routes = [
     extraGear: ['Leech socks', 'Insect repellent', 'Trekking pole'],
   },
 ];
+
+// Find a route by its id (returns undefined if the hike was typed by hand)
+export const routeById = (id) => routes.find((r) => r.id === id);
+
+// Name to show for a plan or log (works for typed names and older entries)
+export const hikeName = (entry) => entry.name || (routeById(entry.routeId) || {}).name || 'My hike';
