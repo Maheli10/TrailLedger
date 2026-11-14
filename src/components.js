@@ -66,8 +66,8 @@ export function StatBox({ value, label, style, transparent }) {
   const { colors, isDark } = useTheme();
   // see-through look: dark mode = clear card, light mode = soft white glass
   const glass = isDark
-    ? { backgroundColor: 'transparent', borderColor: '#235347' }
-    : { backgroundColor: 'rgba(255,255,255,0.65)', borderColor: colors.border };
+    ? { backgroundColor: 'rgba(11, 43, 38, 0.75', borderColor: '#235347' }
+    : { backgroundColor: 'rgba(255,255,255,0.92)', borderColor: colors.border };
   return (
     <View
       style={[

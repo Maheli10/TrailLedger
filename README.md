@@ -8,9 +8,9 @@
 
 ## Project Description
 
-TrailLedger is an offline-first mobile app built with React Native (Expo). It helps hikers browse a bundled catalogue of hiking routes, plan a future hike with a route-specific packing list, and keep a personal log of the hikes they have completed.
+TrailLedger is an offline mobile application. It helps hikers browse a bundled catalogue of hiking routes, plan a future hike with a route-specific packing list, and keep a personal log of the hikes they have completed.
 
-The app works **without an internet connection**. The route dataset is created by the author and bundled inside the app, and everything the user creates (planned hikes, packing progress, hike logs and the light/dark theme choice) is stored locally on the device. No public APIs or online databases are used.
+The app works without an internet connection. The route dataset is created by the author and bundled inside the app, and everything the user creates (planned hikes, packing progress, hike logs and the light/dark theme choice) is stored locally on the device. No public APIs or online databases are used.
 
 ## Features
 
